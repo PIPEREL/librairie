@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %} {% block title %}Hello PaiementController!{% endblock %} {% block body %}
+
+
+<h1>succès du paiement ! </h1>
+<script>
+    setTimeout(function() {
+        window.location.href = "/synfony2/librairie/public/panier";
+    }, 5000);
+</script>
+{% endblock %}

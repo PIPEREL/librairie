@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %} {% block title %}Hello PanierController!{% endblock %} {% block body %}
+
+<div class="example-wrapper">
+    <h1> le panier </h1>
+    <div>total du panier {{cart.total}}$</div>
+    <a href="{{path('panier_vider')}}">vider le panier</a>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Nom</th>
+            <th>prix unitaire</th>
+            <th>quantite</th>
+            <th></th>
+
+        </tr>
+
+
+        {% for element in cart.elements %}
+        <tr>
+            <td>{{element.book.id}}</td>
+            <td>{{element.book.title}}</td>
+            <td>{{element.book.price}}$</td>
+            <td> <a href="{{ path('panier_enlever', {'id': element.book.id}) }}">-</a> {{element.quantity}}<a href="{{ path('panier_add', {'id': element.book.id}) }}">+</a></td>
+            <td><a href="{{ path('panier_effacer', {'id': element.book.id}) }}">delete</a></td>
+        </tr>
+        {% else %} {% endfor %}
+    </table>
+    <div><a href="{{path('catalogue')}}">retourner aux articles</a>
+        <a href="{{path('panier_valider')}}">payer</a>
+
+    </div>
+</div>
+{% endblock %}

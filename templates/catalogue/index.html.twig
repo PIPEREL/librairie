@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %} {% block title %}Hello HomeController!{% endblock %} {% block body %}
+
+<div class="example-wrapper">
+    <h1>Liste des livres à acheter</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.price }}</td>
+                <td>
+                    <a href="{{ path('panier_add', {'id': book.id}) }}">add to cart</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
