@@ -19,8 +19,8 @@ class PaiementController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $commande = $commandeService->New($stripeSessionId);
         $commandeService->add($commande);
-        $manager->persist($commande);
-        $manager->flush();
+        // $manager->persist($commande);
+        // $manager->flush();
         $cartService->clear();
 
         return $this->render('paiement/success.html.twig', [

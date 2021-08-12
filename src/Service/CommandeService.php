@@ -5,17 +5,17 @@ namespace App\Service;
 use DateTime;
 use App\Entity\Commande;
 use App\Entity\CommandeDetail;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Entity\Books;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CommandeService
 {
-    private $sessionInterface;
     private $cartService;
 
-    public function __construct(SessionInterface $sessionInterface, CartService $cartService)
+    public function __construct(CartService $cartService, EntityManagerInterface $em)
     {
-        $this->sessionInterface = $sessionInterface;
         $this->cartService = $cartService;
+        $this->em = $em;
     }
 
 
@@ -34,13 +34,18 @@ class CommandeService
 
     foreach ($panier['elements'] as $element){
         $commandeDetail = new CommandeDetail;
-        $commandeDetail->setBook($element['book']);
+        // $commandeDetail->setBook($element['book']);
         $commandeDetail->setQuantity($element['quantity']);
+        $book = $this->em->getRepository(Books::class)->find($element['book']->getId());
+        $book->addCommandeDetail($commandeDetail);
+        $this->em->persist($book);
+      
         // $element['book']->addCommandeDetail($commandeDetail);
         $commande->addCommandeDetail($commandeDetail);
  
     }
-    
+    $this->em->persist($commande);;
+    $this->em->flush();
 
     }
 

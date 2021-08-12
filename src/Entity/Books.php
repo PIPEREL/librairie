@@ -35,9 +35,10 @@ class Books
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity=CommandeDetail::class, mappedBy="book", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=CommandeDetail::class, mappedBy="Book")
      */
     private $commandeDetails;
+
 
     public function __construct()
     {
@@ -114,4 +115,5 @@ class Books
 
         return $this;
     }
+
 }

@@ -29,11 +29,12 @@ class CommandeDetail
     private $commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Books::class, inversedBy="commandeDetails", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Books::class, inversedBy="commandeDetails")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $book;
+    private $Book;
 
+ 
  
 
     public function getId(): ?int
@@ -67,12 +68,12 @@ class CommandeDetail
 
     public function getBook(): ?Books
     {
-        return $this->book;
+        return $this->Book;
     }
 
-    public function setBook(?Books $book): self
+    public function setBook(?Books $Book): self
     {
-        $this->book = $book;
+        $this->Book = $Book;
 
         return $this;
     }
