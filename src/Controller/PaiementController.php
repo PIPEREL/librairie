@@ -16,7 +16,7 @@ class PaiementController extends AbstractController
     #[Route('/paiement/success/{stripeSessionId}', name: 'paiement_success')]
     public function success(string $stripeSessionId, CommandeService $commandeService, CartService $cartService): Response
     {
-        $manager = $this->getDoctrine()->getManager();
+        // $manager = $this->getDoctrine()->getManager();
         $commande = $commandeService->New($stripeSessionId);
         $commandeService->add($commande);
         // $manager->persist($commande);

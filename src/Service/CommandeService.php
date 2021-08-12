@@ -38,7 +38,7 @@ class CommandeService
         $commandeDetail->setQuantity($element['quantity']);
         $book = $this->em->getRepository(Books::class)->find($element['book']->getId());
         $book->addCommandeDetail($commandeDetail);
-        $this->em->persist($book);
+        // $this->em->persist($book);
       
         // $element['book']->addCommandeDetail($commandeDetail);
         $commande->addCommandeDetail($commandeDetail);
